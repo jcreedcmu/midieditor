@@ -1,1 +1,6 @@
 midieditor.pro.user
+.tmp
+.qmake.stash
+Makefile
+MidiEditor
+qrc_resources.cpp

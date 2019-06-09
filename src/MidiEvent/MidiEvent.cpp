@@ -440,7 +440,7 @@ void MidiEvent::draw(QPainter* p, QColor c)
 {
     p->setPen(Qt::gray);
     p->setBrush(c);
-    p->drawRoundedRect(x(), y(), width(), height(), 1, 1);
+    p->drawRoundedRect(x(), y(), width(), height(), 5, 5);
 }
 
 ProtocolEntry* MidiEvent::copy()

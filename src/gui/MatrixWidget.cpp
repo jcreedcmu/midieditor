@@ -234,7 +234,7 @@ void MatrixWidget::paintEvent(QPaintEvent* event)
         for (int i = startLineY; i <= endLineY; i++) {
             int startLine = yPosOfLine(i);
             QColor c(194, 230, 255);
-            if (i % 2 == 0) {
+            if ((127 - i) % 12 != 0) {
                 c = QColor(234, 246, 255);
             }
 
@@ -535,6 +535,21 @@ void MatrixWidget::paintEvent(QPaintEvent* event)
     }
 }
 
+QColor *colors[12] = {
+							 new QColor(38, 42, 224),
+							 new QColor(255, 255, 255),
+							 new QColor(237, 29, 29),
+							 new QColor(95, 103, 95),
+							 new QColor(247, 228, 20),
+							 new QColor(245, 117, 12),
+							 new QColor(102, 34, 18),
+							 new QColor(37, 151, 7),
+							 new QColor(82, 51, 140),
+							 new QColor(242, 9, 234),
+							 new QColor(25, 25, 25),
+							 new QColor(42, 216, 169),
+};
+
 void MatrixWidget::paintChannel(QPainter* painter, int channel)
 {
     if (!file->channel(channel)->visible()) {
@@ -559,6 +574,7 @@ void MatrixWidget::paintChannel(QPainter* painter, int channel)
 
             int x, width;
             int y = yPosOfLine(line);
+				QColor lC = *(colors[(127 - line) % 12]);
             int height = lineHeight();
 
             if (onEvent || offEvent) {
@@ -589,14 +605,7 @@ void MatrixWidget::paintChannel(QPainter* painter, int channel)
                 if (!_colorsByChannels) {
                     cC = *event->track()->color();
                 }
-                event->draw(painter, cC);
-
-                if (Selection::instance()->selectedEvents().contains(event)) {
-                    painter->setPen(Qt::gray);
-                    painter->drawLine(lineNameWidth, y, this->width(), y);
-                    painter->drawLine(lineNameWidth, y + height, this->width(), y + height);
-                    painter->setPen(Qt::black);
-                }
+                event->draw(painter, lC);
                 objects->prepend(event);
             }
         }

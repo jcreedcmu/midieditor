@@ -126,10 +126,14 @@ void EventTool::paintSelectedEvents(QPainter* painter)
         }
 
         if (show) {
-            painter->setBrush(Qt::darkBlue);
-            painter->setPen(Qt::lightGray);
-            painter->drawRoundedRect(event->x(), event->y(), event->width(),
-                event->height(), 1, 1);
+			 QColor alpha(255, 255, 255, 0);
+          painter->setBrush(alpha);
+			 QColor c(0, 255, 255);
+			 QPen pen(c);
+			 pen.setWidth(3);
+			 painter->setPen(pen);
+			 painter->drawRoundedRect(event->x(), event->y(), event->width(),
+											  event->height(), 5, 5);
         }
     }
 }
